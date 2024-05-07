@@ -1,0 +1,17 @@
+{
+  "name": "file-getter",
+  "version": "0.0.1",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/mjs/index.js",
+  "browser": "dist/cjs/index.cjs",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm run build:cjs && pnpm run build:mjs",
+    "build:cjs": "tsc index.ts --module commonjs --outDir dist/cjs",
+    "build:mjs": "tsc index.ts --module esnext --outDir dist/mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "typescript": "^5.4.5"
+  }
+}
