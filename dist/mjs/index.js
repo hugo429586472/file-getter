@@ -17,11 +17,12 @@ import * as path from 'node:path';
  */
 var get_file_path = function (fileName, options) {
     var resFileName = handle_file_name(fileName, options);
-    var filePath = options.filePath || '';
+    var relativeFileDir = options && options.relativeFileDir || '';
+    var sourcePath = options && options.sourcePath || '';
     try {
         return {
             result: true,
-            path: trace_get_file_path(resFileName, filePath)
+            path: trace_get_file_path(resFileName, relativeFileDir, sourcePath)
         };
     }
     catch (error) {
@@ -39,8 +40,9 @@ var get_file_path = function (fileName, options) {
  * 输出：
  *  "/Users/user/project/src/config.js"
  */
-var trace_get_file_path = function (fileName, filePath) {
-    var resFilePath = filePath && filePath !== '' ? filePath + '/' + fileName : fileName;
+var trace_get_file_path = function (fileName, relativeFileDir, filePath) {
+    var relativeFileName = relativeFileDir + fileName;
+    var resFilePath = filePath && filePath !== '' ? filePath + '/' + relativeFileName : relativeFileName;
     if (fs.existsSync(resFilePath)) {
         return resFilePath;
     }
@@ -49,7 +51,7 @@ var trace_get_file_path = function (fileName, filePath) {
         if (parentDir === filePath || parentDir === '/') {
             throw new Error("Cannot find ".concat(fileName));
         }
-        return trace_get_file_path(fileName, parentDir);
+        return trace_get_file_path(fileName, relativeFileDir, parentDir);
     }
 };
 /*

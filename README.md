@@ -35,11 +35,11 @@ file_getter('test2.js');
 ```js
 import file_getter from 'file-getter';
 
-
+// 查找上级目录中，是否有 ./src/test.js 文件
 file_getter('test.js', {
-  filePath: '/user/test/src'
+  relativeFileDir: 'src'
 });
-//=> /user/test/test.js
+//=> /user/test/src/test.js
 
 
 ```

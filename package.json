@@ -1,10 +1,9 @@
 {
   "name": "file-getter",
   "version": "0.0.1",
-  "main": "dist/cjs/index.cjs",
+  "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
   "browser": "dist/cjs/index.cjs",
-  "type": "module",
   "scripts": {
     "build": "pnpm run build:cjs && pnpm run build:mjs",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",

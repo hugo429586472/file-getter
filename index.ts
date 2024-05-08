@@ -8,7 +8,8 @@ import * as path from 'node:path';
 interface Options {
   useEnv: boolean;
   envSuffix: string;
-  filePath?: string;
+  relativeFileDir?: string;
+  sourcePath?: string;
 }
 
 interface Result {
@@ -30,12 +31,13 @@ interface Result {
  */
 const get_file_path = (fileName: string, options?: Options): Result => {
   const resFileName = handle_file_name(fileName, options);
-  const filePath = options && options.filePath || '';
+  const relativeFileDir = options && options.relativeFileDir || '';
+  const sourcePath = options && options.sourcePath || '';
 
   try {
     return {
       result: true,
-      path: trace_get_file_path(resFileName, filePath)
+      path: trace_get_file_path(resFileName, relativeFileDir, sourcePath)
     };
   } catch (error) {
     return {
@@ -53,8 +55,9 @@ const get_file_path = (fileName: string, options?: Options): Result => {
  * 输出：
  *  "/Users/user/project/src/config.js"
  */
-const trace_get_file_path = (fileName: string, filePath: string): string => {
-  const resFilePath = filePath && filePath !== '' ? filePath + '/' + fileName : fileName;
+const trace_get_file_path = (fileName: string, relativeFileDir: string, filePath: string): string => {
+  const relativeFileName = relativeFileDir + fileName;
+  const resFilePath = filePath && filePath !== '' ? filePath + '/' + relativeFileName : relativeFileName;
   if (fs.existsSync(resFilePath)) {
     return resFilePath;
   } else {
@@ -63,7 +66,7 @@ const trace_get_file_path = (fileName: string, filePath: string): string => {
       throw new Error(`Cannot find ${fileName}`);
     }
 
-    return trace_get_file_path(fileName, parentDir);
+    return trace_get_file_path(fileName, relativeFileDir, parentDir);
   }
 }
 
