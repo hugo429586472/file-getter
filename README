@@ -1,6 +1,6 @@
 # file-getter
 
-向上溯源获取文件对应路径。
+向上查找，获取文件对应路径。
 
 Get the file path of the filename.
 
@@ -22,10 +22,10 @@ $ npm install file-getter
 import file_getter from 'file-getter';
 
 file_getter('test.js');
-//=> /Users/xxx/github/file-getter/test/test.js
+//=>./test.js
 
-file_getter('package.json');
-//=> /Users/xxx/github/file-getter/package.json
+file_getter('test2.js');
+//=> /xxx/test2.js
 
 ```
 
