@@ -2,6 +2,9 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "types": ["node"]
-  }
+    "types": ["node"],
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["./index.ts"]
 }

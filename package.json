@@ -7,8 +7,8 @@
   "type": "module",
   "scripts": {
     "build": "pnpm run build:cjs && pnpm run build:mjs",
-    "build:cjs": "tsc index.ts --module commonjs --outDir dist/cjs",
-    "build:mjs": "tsc index.ts --module esnext --outDir dist/mjs"
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:mjs": "tsc --module esnext --outDir dist/mjs"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
