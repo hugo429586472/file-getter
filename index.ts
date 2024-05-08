@@ -28,9 +28,9 @@ interface Result {
  * 输出：
  *  "config.js.prod"
  */
-const get_file_path = (fileName: string, options: Options): Result => {
+const get_file_path = (fileName: string, options?: Options): Result => {
   const resFileName = handle_file_name(fileName, options);
-  const filePath = options.filePath || '';
+  const filePath = options && options.filePath || '';
 
   try {
     return {
