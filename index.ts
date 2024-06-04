@@ -90,6 +90,35 @@ const handle_file_name = (fileName: string, options: Options): string => {
   return fileName;
 }
 
+/*
+ * 获取当前工作目录
+ * 输入：
+ *  dir: "./"
+ * 输出：
+ *  "/Users/user/project"
+ */
+export const resolve = (dir) => {
+  return path.join(process.cwd(), '.', dir)
+}
+
+/*
+ * 获取包路径
+ * 输入：
+ *  pkg: "react-native"
+ * 输出：
+ *  "/Users/user/project/node_modules/react-native"
+ * 或
+ * 如果使用了pnpm输出：
+ *  "/Users/user/project/.pnpm/react-native@0.64.2/node_modules/react-native"
+ */
+export const get_pkg_path = (pkg) => {
+  const pathRoute = pkg + '/package.json'
+  return path.join(require.resolve(pathRoute), '..')
+}
+
 export const file_getter = get_file_path;
 
-export default get_file_path;
+export default {
+  get_file_path,
+  get_pkg_path
+};

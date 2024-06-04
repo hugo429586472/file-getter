@@ -9,7 +9,12 @@ interface Result {
     path?: string;
     error?: Error;
 }
-declare const get_file_path: (fileName: string, options?: Options) => Result;
+export declare const resolve: (dir: any) => string;
+export declare const get_pkg_path: (pkg: any) => string;
 export declare const file_getter: (fileName: string, options?: Options) => Result;
-export default get_file_path;
+declare const _default: {
+    get_file_path: (fileName: string, options?: Options) => Result;
+    get_pkg_path: (pkg: any) => string;
+};
+export default _default;
 //# sourceMappingURL=index.d.ts.map

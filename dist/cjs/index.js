@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.file_getter = void 0;
+exports.file_getter = exports.get_pkg_path = exports.resolve = void 0;
 /*
  * 溯源向上查找，获取文件对应的路径
  * ts文件
@@ -98,5 +98,34 @@ var handle_file_name = function (fileName, options) {
     }
     return fileName;
 };
+/*
+ * 获取当前工作目录
+ * 输入：
+ *  dir: "./"
+ * 输出：
+ *  "/Users/user/project"
+ */
+var resolve = function (dir) {
+    return path.join(process.cwd(), '.', dir);
+};
+exports.resolve = resolve;
+/*
+ * 获取包路径
+ * 输入：
+ *  pkg: "react-native"
+ * 输出：
+ *  "/Users/user/project/node_modules/react-native"
+ * 或
+ * 如果使用了pnpm输出：
+ *  "/Users/user/project/.pnpm/react-native@0.64.2/node_modules/react-native"
+ */
+var get_pkg_path = function (pkg) {
+    var pathRoute = pkg + '/package.json';
+    return path.join(require.resolve(pathRoute), '..');
+};
+exports.get_pkg_path = get_pkg_path;
 exports.file_getter = get_file_path;
-exports.default = get_file_path;
+exports.default = {
+    get_file_path: get_file_path,
+    get_pkg_path: exports.get_pkg_path
+};
